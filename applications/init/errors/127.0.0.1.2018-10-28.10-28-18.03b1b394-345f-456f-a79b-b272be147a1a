@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S'The "end" tag is unmatched, please check if you have a starting "block" tag'
+p3
+sS'layer'
+p4
+S'ParserContainer'
+p5
+sS'code'
+p6
+S'{{extend \'layout.html\'}}\n\n<head>\n    <link href="/css/allcss.css" rel="stylesheet" type="text/css"/>\n</head>\n\n<div class="jumbotron jumbotron-fluid background" style="background-color: #333; color:white; padding:30px;word-wrap:break-word;">\n  <div class="container center">\n    <h1 class="display-5">Homepage</h1>\n  </div>\n</div>\n{{end}}\n\n<div id="frontpage">\n  <div class="postbox">\n      <div class="container padded center">\n          <div class="twothirds compressible">\n            This box stil in construction\n          </div>\n        \n          <div class="third compressible">\n            <div class="right topnav">\n              <button type="add-post"><a href="{{=URL(\'default\', \'add_post\')}}\'">Add Post</a></button>\n              <button type="search-post"><a href="#contact">Search Post</a></button>\n            </div>\n          </div>\n        </div>\n  </div>\n</div>\n\n<!-- Default code ==================================\n<div class="row">\n  <div class="col-md-12">\n    {{if \'message\' in globals():}}\n    <h2>{{=message}}</h2>\n    <p class="lead">{{=T(\'This page is still under construction\')}}</p>\n    {{elif \'content\' in globals():}}\n    {{=content}}\n    {{else:}}\n    {{=BEAUTIFY(response._vars)}}\n    {{pass}}\n  </div>\n</div>\n=====================================================-->\n\n\n\n'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'None\n'
+p11
+s.
