@@ -36,6 +36,11 @@ routers = dict(
     ) 
 ) 
 
+routes_in = (
+  ('/favicon.ico', '/init/static/images/favicon.ico'),
+)
+routes_out = ()
+
 # ----------------------------------------------------------------------------------------------------------------------
 # NOTE! To change language in your application using these rules add this line in one of your models files:
 # ----------------------------------------------------------------------------------------------------------------------
