@@ -4,7 +4,7 @@
 
 <div class="jumbotron jumbotron-fluid background" style="background-color: #333; color:white; padding:30px;word-wrap:break-word;">
   <div class="container center">
-    <h1 class="display-5">Homepage</h1>
+    <h1 class="display-5">Welcome to Said-It!</h1>
   </div>
 </div>
 {{end}}
@@ -15,17 +15,28 @@
 
         <div class="twothirds compressible">
           <div class="postbox">
-              This box still in construction.<br/><br/>
+            <!--<img src="{{=URL('static/images', 'scenery.jpg')}}">-->
+            Get started by making an account!<br/>
+            <button type="login"><a href="{{=URL('default','user/login')}}">{{=T('Login')}}</a></button>
+              
           </div>
         </div>
       
         <div class="third compressible">
-          <div class="featurebox">
-              <div style="text-align:right; position:absolute; left:90%">
-                <button type="add-post"><a href="{{=URL('default', 'add_post')}}'">Add Post</a></button>
-                <br/><br/>
-                <button type="search-post"><a href="#contact">Search Post</a></button>
+          <div class="row">
+              <div class="col-sm-4"></div>
+
+              <div class="col-sm-4">
+                <div style="text-align:right; position:absolute; left:100%">
+
+                  <button type="add-post"><a href="{{=URL('default', 'add_post')}}'">Add Post</a></button>
+                </div>
               </div>
+
+              <div class="col-sm-4"> 
+                <button type ="search-post"><a href="#contact">Search Post</a></button>
+              </div>
+            </div>
           </div>
         </div>
         

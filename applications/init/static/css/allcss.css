@@ -1,6 +1,11 @@
 #frontpage div.postbox {
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 51%, rgba(0,212,255,1) 81%);
     border: 2px solid black;
+    color:white;
     font-family: Verdana;
+}
+div.featurebox {
+    border : 2px solid black;
 }
 
 div.topnav {
