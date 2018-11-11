@@ -1,0 +1,29 @@
+.posts {
+    display: flex;
+}
+
+.post-box img {
+    display: block;
+    margin: auto;
+    height: 150px;
+}
+
+.post-title {
+    font-size: 20px;
+    text-align: center;
+}
+
+.post-box {
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid black;
+    width: 200px;
+    padding: 15px;
+}
+
+.post-box a {
+    top: 5px;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
