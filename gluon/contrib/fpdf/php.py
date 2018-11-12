@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: latin-1 -*-
-
+file_uploads = On
 from .py3k import PY3K, basestring, unicode
 
 # fpdf php helpers:
