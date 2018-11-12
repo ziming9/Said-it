@@ -22,11 +22,11 @@ var insertPost = function() {
         title: app.newPostTitle,
         post_content: app.newPostContent,
     };
-    //$.post(get_posts_url, newPost, function(response) { //this line gives error to adding the post
-    //    newPost['id'] = response.new_post_id;
+    $.post(get_posts_url, newPost, function(response) { 
+        newPost['id'] = response.new_post_id;
         app.posts.push(newPost);
         processPosts();
-    //})
+    })
 };
 
 
@@ -37,7 +37,7 @@ var app = new Vue({
     data: {
         newPostTitle: "",
         newPostContent: "",
-        posts: [],
+        posts: []
     },
     methods: {
         submitPost: insertPost

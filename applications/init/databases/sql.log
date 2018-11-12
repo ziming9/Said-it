@@ -420,3 +420,14 @@ success!
 success!
 =======
 >>>>>>> 7ac1c264ec8ef731294fc2784ea7681ac3547f03
+success!
+success!
+timestamp: 2018-11-10T18:55:06.272668
+CREATE TABLE "posts"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "username" CHAR(512),
+    "title" CHAR(512),
+    "post_content" TEXT,
+    "post_time" TIMESTAMP
+);
+success!
