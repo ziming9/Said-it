@@ -7,6 +7,7 @@ var enumerate = function(arr) {
 
 var processPosts = function() {
     enumerate(app.posts);
+    console.log(app.posts);
 };
 
 var onPageLoad = function() {
@@ -36,7 +37,14 @@ var editPost = function(idx) {
 
 var savePost = function(idx) {
     app.posts[idx].editing = false;
-    // make request to server here to save changes in database
+    var newPost = {
+        id: app.posts[idx].id,
+        title: app.posts[idx].title,
+        post_content: app.posts[idx].post_content
+    };
+    $.post(editPostUrl, newPost, function(response) {
+        onPageLoad();
+    });
 };
 
 var app = new Vue({

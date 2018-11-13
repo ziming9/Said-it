@@ -20,3 +20,10 @@ def get_all_posts():
         post_list.append(post_to_send)
 
     return response.json(dict(posts=post_list))
+
+def edit_posts():
+    db.posts.update_or_insert(db.posts.id == request.vars.id,
+        title=request.vars.title,
+        post_content=request.vars.post_content
+    )
+    return "post edited!"

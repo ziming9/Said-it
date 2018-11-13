@@ -6,6 +6,7 @@
 <script>
   var getPostsUrl = "{{=URL('api', 'get_all_posts')}}";
   var insertPostUrl = "{{=URL('api', 'insert_post')}}";
+  var editPostUrl = "{{=URL('api', 'edit_posts')}}";
 </script>
 
 <div class="jumbotron jumbotron-fluid background" style="background-color: #333; color:white; padding:30px;word-wrap:break-word;">
@@ -22,6 +23,7 @@
   </button>
 
   <!-- Display/Edit Post form Here -->
+
   <div class="posts">
     <div v-for="post in posts" class="post-box">
       <div v-if="!post.editing">

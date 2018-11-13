@@ -19,6 +19,8 @@
     border: 1px solid black;
     width: 200px;
     padding: 15px;
+    background: url(/init/static/images/post-it.jpg) center no-repeat;
+    background-size: 100%;
 }
 
 .post-box a {
