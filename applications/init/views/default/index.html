@@ -4,8 +4,8 @@
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 
 <script>
-  var get_posts_url = "{{=URL('api', 'get_all_post')}}";
-  var insert_post_url = "{{=URL('api', 'insert_post')}}";
+  var getPostsUrl = "{{=URL('api', 'get_all_posts')}}";
+  var insertPostUrl = "{{=URL('api', 'insert_post')}}";
 </script>
 
 <div class="jumbotron jumbotron-fluid background" style="background-color: #333; color:white; padding:30px;word-wrap:break-word;">
@@ -15,44 +15,55 @@
 </div>
 {{end}}
 
-<div id="frontpage">
-  <div class="container">
-      <div class="row justify-content-md-center">
-        <!---
-        <div class="col col-sm-10">
-          <div class="postbox">
-              #Put posts here.<br/><br/>
-              
-          </div>
-        </div>
-        
-        <div class="col col-lg-1">
-          <div class="featurebox">
-                <button type="add-post"><a href="{{=URL('default', 'add_post')}}'">Add Post</a></button>
-                <br/><br/>
-                <button type="search-post"><a href="#contact">Search Post</a></button>
-          </div>
-        </div>
-      -->
-      </div>
-  </div>
-</div>
-
-<button type="addpost" class="btn btn-info" data-toggle="modal" data-target="#addpostModal">
-  Add Post
-</button>
-
 <div id="app">
 
-<div class="modal fade" id="addpostModal" tabindex="-1" role="dialog" aria-labelledby="addpostLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
+  <button type="addpost" class="btn btn-info" data-toggle="modal" data-target="#addpostModal">
+      Add Post
+  </button>
+
+  <!-- Display/Edit Post form Here -->
+  <div class="posts">
+    <div v-for="post in posts" class="post-box">
+      <div v-if="!post.editing">
+        <p>Title: ${ post.title }</p>
+        <p>Content: ${ post.post_content }</p>
+        <i class="fa fa-pencil-square-o" v-on:click="editPost(post._idx)"></i>
+      </div>
+
+      <div v-if="post.editing">
+        <input type="text" v-model="post.title"/>
+        <textarea v-model="post.post_content"></textarea>
+        <button v-on:click="savePost(post._idx)">Save</button>
+      </div>
+        <!--
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#postcontentModal">Expand</button>
+  
+        <div class="modal fade" id="postcontentModal" role="dialog">
           <div class="modal-header">
-              <h5 class="modal-title" id="addposttitle">Add Post</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">${ post.title }</h4>
           </div>
+          <div class="modal-body">
+            <p>${ post.post_content }</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        -->
+    </div>
+  </div>
+  
+
+  <div class="modal fade" id="addpostModal" tabindex="-1" role="dialog" aria-labelledby="addpostLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addposttitle">Add Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-body">
               <!-- Edit add post form here -->
               <div class="row">
@@ -62,26 +73,25 @@
                 <div class="form-group col-9">
                   <textarea v-model="newPostContent" cols="50" id="post" name="post" placeholder="Enter content *" rows="7" required type="text"></textarea>
                 </div>
+
+                <!-- Uploading images not done  https://www.w3schools.com/php/php_file_upload.asp-->
+                <form action="upload.php" method="post" enctype="multipart/form-data">
+                  Select image to upload: 
+                  <input type="file" name="fileToUpload" id="fileToUpload">
+                  <input type="submit" value="Upload Image" name="submit">
+                </form>
+
               </div>
             </div>
-          
+
             <div class="modal-footer">
               <button v-on:click="submitPost" class="btn btn-outline-info" data-dismiss="modal">Add Post</button>
               <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
             </div>
-      </div>
-  </div>
-</div>
-
-    <div class="posts">
-      <div v-for="post in posts" class="post-box">
-        <p>${ post.title }</p>
-        <p>${ post.post_content }</p>
-      </div>
+        </div>
     </div>
+  </div>
 
 </div>
 
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
-
-

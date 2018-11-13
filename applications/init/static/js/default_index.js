@@ -1,6 +1,7 @@
 var enumerate = function(arr) {
     var k=0; return arr.map(function(e) {
         e._idx = k++;
+        Vue.set(e, 'editing', false);
     });
 };
 
@@ -9,7 +10,7 @@ var processPosts = function() {
 };
 
 var onPageLoad = function() {
-    $.getJSON(get_posts_url,
+    $.getJSON(getPostsUrl,
         function(response) {
             app.posts = response.posts;
             processPosts();
@@ -20,15 +21,23 @@ var onPageLoad = function() {
 var insertPost = function() {
     var newPost = {
         title: app.newPostTitle,
-        post_content: app.newPostContent,
+        post_content: app.newPostContent
     };
-    $.post(get_posts_url, newPost, function(response) { 
+    $.post(insertPostUrl, newPost, function(response) { 
         newPost['id'] = response.new_post_id;
         app.posts.push(newPost);
         processPosts();
-    })
+    });
 };
 
+var editPost = function(idx) {
+    app.posts[idx].editing = true;
+};
+
+var savePost = function(idx) {
+    app.posts[idx].editing = false;
+    // make request to server here to save changes in database
+};
 
 var app = new Vue({
     el: '#app',
@@ -37,10 +46,12 @@ var app = new Vue({
     data: {
         newPostTitle: "",
         newPostContent: "",
-        posts: []
+        posts: [],
     },
     methods: {
-        submitPost: insertPost
+        submitPost: insertPost,
+        editPost: editPost,
+        savePost: savePost
     }
 });
 

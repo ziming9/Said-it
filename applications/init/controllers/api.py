@@ -1,4 +1,3 @@
-
 def insert_post():
     new_post_id = db.posts.insert(
         title=request.vars.title,
@@ -6,7 +5,7 @@ def insert_post():
     )
     return response.json(dict(new_post_id=new_post_id))
 
-def get_all_post():
+def get_all_posts():
     posts = db(db.posts).select()   #get all posts entries in post table
 
     post_list = []
@@ -17,7 +16,7 @@ def get_all_post():
             title=post.title,
             post_content=post.post_content
         )
-
+        
         post_list.append(post_to_send)
 
     return response.json(dict(posts=post_list))
