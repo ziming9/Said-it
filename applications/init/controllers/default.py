@@ -10,6 +10,9 @@ import os
 def index():
     return dict(message=T('Welcome to said-it!'))
 
+
+
+
 @auth.requires_login()
 def add_post():
     form = SQLFORM(db.post)
@@ -128,7 +131,22 @@ def download():
     """
     return response.download(request, db)
 
+def link(): 
+    return response.download(request,db,attachment=False)
+
 def serve_file():
     filename = request.args(0)
     path = os.path.join(request.folder, 'private', 'file_subfolder', filename)
     return response.stream(path)
+
+def myform():
+
+    form = SQLFORM(db.image)
+    if form.accepts(request, session):
+        session.flash = "successfull upload"
+        redirect(URL(c='default', f='index'))
+    return dict(form=form)
+
+
+
+

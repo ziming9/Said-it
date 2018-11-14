@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.AttributeError'> 'DAL' object has no attribute 'images'"
+p3
+sS'layer'
+p4
+S'/mnt/c/Users/Me/Desktop/UCSC/CS183/said-it/applications/init/controllers/default.py'
+p5
+sS'code'
+p6
+S'<code object <module> at 0x7fe4643d7430, file "/mnt/c/Users/Me/Desktop/UCSC/CS183/said-it/applications/init/controllers/default.py", line 7>'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/mnt/c/Users/Me/Desktop/UCSC/CS183/said-it/gluon/restricted.py", line 219, in restricted\n    exec(ccode, environment)\n  File "/mnt/c/Users/Me/Desktop/UCSC/CS183/said-it/applications/init/controllers/default.py", line 158, in <module>\n  File "/mnt/c/Users/Me/Desktop/UCSC/CS183/said-it/gluon/globals.py", line 421, in <lambda>\n    self._caller = lambda f: f()\n  File "/mnt/c/Users/Me/Desktop/UCSC/CS183/said-it/applications/init/controllers/default.py", line 154, in index\n    return dict(img_upload_form=images())\n  File "/mnt/c/Users/Me/Desktop/UCSC/CS183/said-it/applications/init/controllers/default.py", line 139, in images\n    record = db.images(request.args(0))\n  File "/mnt/c/Users/Me/Desktop/UCSC/CS183/said-it/gluon/packages/dal/pydal/base.py", line 673, in __getattr__\n    return BasicStorage.__getattribute__(self, key)\nAttributeError: \'DAL\' object has no attribute \'images\'\n'
+p11
+s.

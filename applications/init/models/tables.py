@@ -11,3 +11,11 @@ db.define_table('posts',
                 Field('title'),
                 Field('post_content', 'text'),
                 )
+
+#db.define_table('image',
+#               Field('title'),
+#               Field('fileName ','upload'),
+#               format = '%(title)s')
+                
+db.define_table('image', Field('fileName', 'upload', 
+required=True, notnull=True, requires = IS_NOT_EMPTY()))
