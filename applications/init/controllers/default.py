@@ -140,7 +140,6 @@ def serve_file():
     return response.stream(path)
 
 def myform():
-
     form = SQLFORM(db.image)
     if form.accepts(request, session):
         session.flash = "successfull upload"
