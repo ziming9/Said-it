@@ -6,12 +6,8 @@ def get_user_name():
 def get_current_time():
     return datetime.datetime.utcnow()
 
-db.define_table('post',
-                Field('username', default=get_user_name),
+db.define_table('posts',
+                Field('username', default=get_user_name()),
                 Field('title'),
                 Field('post_content', 'text'),
-                Field('post_time', 'datetime', update=get_current_time()),
                 )
-
-db.post.post_time.readable = db.post.post_time.writable = False
-db.post.username.writable = False
