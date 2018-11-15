@@ -19,6 +19,14 @@ var onPageLoad = function() {
     );
 };
 
+var loadFile = function(event) {
+    var image = document.getElementById('output');
+    image.src = URL.createObjectURL(event.target.files[0]);
+    $.post(getImageUrl, image, function(response) {
+        onPageLoad();
+    });
+};
+
 var insertPost = function() {
     var newPost = {
         title: app.newPostTitle,
