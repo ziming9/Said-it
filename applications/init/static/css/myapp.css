@@ -5,6 +5,8 @@
 }
 .back {
     background: url(/init/static/images/yellow.jpg) center no-repeat;
+   
+    background-size: cover;
     margin : 0px;
 }
 
@@ -35,4 +37,9 @@
     display: block;
     margin: auto;
     text-align: center;
+}
+
+.copyright {
+    width : 100%;
+    color: white;
 }

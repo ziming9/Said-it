@@ -10,24 +10,21 @@
   var getImageUrl = "{{=URL('api', 'myform')}}";
 </script>
 
-<div class="jumbotron jumbotron-fluid background" style="background-color: #333; color:white; padding:30px;word-wrap:break-word;">
-  <div class="container center">
-    <h1 class="display-5">Welcome to Said-It!</h1>
-  </div>
-</div>
-{{end}}
+
 <div class = "back">
+    
   <div id="app">
 
-    <button type="addpost" class="btn btn-info" data-toggle="modal" data-target="#addpostModal">
-        Add Post
-    </button>
+      
 
     <!-- Display/Edit Post form Here -->
 
     <div class="posts">
+        <button type="addpost" class="btn btn-info right" data-toggle="modal" data-target="#addpostModal">
+          Add Post
+        </button> <br> <br>
       <div v-for="post in posts" class="post-box center">
-      
+        
         <div v-if="!post.editing">
           <p>Title: ${ post.title }</p>
           <p>Content: ${ post.post_content }</p>
@@ -104,3 +101,5 @@
 
   <script src="{{=URL('static', 'js/default_index.js')}}"></script>
 </div>
+
+{{end}}

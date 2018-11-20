@@ -10,14 +10,7 @@ var processPosts = function() {
     console.log(app.posts);
 };
 
-var onPageLoad = function() {
-    $.getJSON(getPostsUrl,
-        function(response) {
-            app.posts = response.posts;
-            processPosts();
-        }
-    );
-};
+
 
 var loadFile = function(event) {
     var image = document.getElementById('output');
@@ -53,6 +46,15 @@ var savePost = function(idx) {
     $.post(editPostUrl, newPost, function(response) {
         onPageLoad();
     });
+};
+
+var onPageLoad = function() {
+    $.getJSON(getPostsUrl,
+        function(response) {
+            app.posts = response.posts;
+            processPosts();
+        }
+    );
 };
 
 var app = new Vue({
