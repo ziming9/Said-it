@@ -13,6 +13,9 @@ def index():
 
 
 
+
+
+
 @auth.requires_login()
 def add_post():
     form = SQLFORM(db.post)
@@ -145,6 +148,8 @@ def myform():
         session.flash = "successfull upload"
         redirect(URL(c='default', f='index'))
     return dict(form=form)
+
+
 
 
 

@@ -57,6 +57,15 @@ var onPageLoad = function() {
     );
 };
 
+var showPost = function() {
+    $("#postys").show();
+    $("#show_button").hide();
+}
+var hidePost = function() {
+    $("#postys").hide();
+    $("#show_button").show();
+}
+
 var app = new Vue({
     el: '#app',
     delimiters: ['${','}'],
@@ -69,7 +78,9 @@ var app = new Vue({
     methods: {
         submitPost: insertPost,
         editPost: editPost,
-        savePost: savePost
+        savePost: savePost,
+        showPost: showPost,
+        hidePost: hidePost,
     }
 });
 
