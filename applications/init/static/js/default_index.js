@@ -10,15 +10,6 @@ var processPosts = function() {
     console.log(app.posts);
 };
 
-var onPageLoad = function() {
-    $.getJSON(getPostsUrl,
-        function(response) {
-            app.posts = response.posts;
-            processPosts();
-        }
-    );
-};
-
 var loadFile = function(event) {
     var image = document.getElementById('output');
     image.src = URL.createObjectURL(event.target.files[0]);
@@ -55,6 +46,25 @@ var savePost = function(idx) {
     });
 };
 
+var onPageLoad = function() {
+    $.getJSON(getPostsUrl,
+        function(response) {
+            app.posts = response.posts;
+            processPosts();
+        }
+    );
+};
+
+var showPost = function() {
+    $("#postys").show();
+    $("#show_button").hide();
+};
+
+var hidePost = function() {
+    $("#postys").hide();
+    $("#show_button").show();
+};
+
 var app = new Vue({
     el: '#app',
     delimiters: ['${','}'],
@@ -63,11 +73,21 @@ var app = new Vue({
         newPostTitle: "",
         newPostContent: "",
         posts: [],
+        search: '',
     },
     methods: {
         submitPost: insertPost,
         editPost: editPost,
-        savePost: savePost
+        savePost: savePost,
+        showPost: showPost,
+        hidePost: hidePost
+    },
+    computed: {
+        filteredPosts: function() {
+            return this.posts.filter((post) => {
+                return post.title.match(this.search);
+            })
+        }
     }
 });
 
