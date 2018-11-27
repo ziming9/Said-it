@@ -46,6 +46,12 @@ var savePost = function(idx) {
     });
 };
 
+var getCategory = function () {
+    var categoryValue = document.getElementById("category").value;
+    document.getElementById("categoryText").innerHTML = "Category : " + categoryValue;
+
+}
+
 var onPageLoad = function() {
     $.getJSON(getPostsUrl,
         function(response) {
@@ -65,6 +71,7 @@ var hidePost = function() {
     $("#show_button").show();
 };
 
+
 var app = new Vue({
     el: '#app',
     delimiters: ['${','}'],
@@ -80,7 +87,8 @@ var app = new Vue({
         editPost: editPost,
         savePost: savePost,
         showPost: showPost,
-        hidePost: hidePost
+        hidePost: hidePost,
+        getCategory: getCategory
     },
     computed: {
         filteredPosts: function() {

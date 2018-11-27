@@ -1317,3 +1317,6 @@ CREATE TABLE "image"(
     "fileName" CHAR(512) NOT NULL
 );
 success!
+timestamp: 2018-11-26T18:57:10.633059
+ALTER TABLE "posts" ADD "category" CHAR(512);
+success!

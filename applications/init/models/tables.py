@@ -13,7 +13,8 @@ db.define_table('posts',
                 Field('username', default=get_user_name()),
                 Field('author', default=get_user_email()),
                 Field('title'),
-                Field('post_content', 'text'),                
+                Field('post_content', 'text'),  
+                Field('category'),             
                 )
 
 #db.define_table('image',

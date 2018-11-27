@@ -43,9 +43,9 @@
 
           <div v-if="!post.editing">
             <p>Author: ${ post.author} </p>
-            <p>Username : ${post.username}</p>
             <p>Title: ${ post.title }</p>
             <p>Content: ${ post.post_content }</p>
+            <p>Category: ${post.category}</p>
             <button> <i class="fa fa-pencil-square-o" v-on:click="editPost(post._idx)"> Edit</i> </button>
           </div>
 
@@ -103,9 +103,20 @@
                   <div class="form-group col-9">
                     <textarea v-model="newPostContent" cols="50" id="post" name="post" placeholder="Enter content *" rows="7" required type="text"></textarea>
                   </div>
-
-                  
                 </div>
+                Select Category  <select name="category" onchange = "getCategory()">
+                  <option value="Sports">Sports</option>
+                  <option value="News">News</option>
+                  <option value="Arts">Arts</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="History">History</option>
+                  <option value="Politics">Politics</option>
+                  <option value="Blog">Blog</option>
+                  <option value="Education">Education</option>
+                  <option value="Religion">Religion</option>
+                  <option value="Technology">Technology</option>
+                </select>
+                
               </div>
 
               <div class="modal-footer">
