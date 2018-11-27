@@ -1,7 +1,10 @@
+@auth.requires_login()
 def insert_post():
     new_post_id = db.posts.insert(
+        author=request.vars.author,
         title=request.vars.title,
-        post_content=request.vars.post_content
+        post_content=request.vars.post_content,
+        category=request.vars.category
     )
     return response.json(dict(new_post_id=new_post_id))
 
@@ -13,8 +16,10 @@ def get_all_posts():
     for post in posts:
         post_to_send = dict(
             id=post.id,
+            author=post.author,
             title=post.title,
-            post_content=post.post_content
+            post_content=post.post_content,
+            category=post.category
         )
         
         post_list.append(post_to_send)
@@ -27,3 +32,5 @@ def edit_posts():
         post_content=request.vars.post_content
     )
     return "post edited!"
+
+

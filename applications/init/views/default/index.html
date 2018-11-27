@@ -1,5 +1,4 @@
 {{extend 'layout.html'}}
-<link rel="stylesheet" href="{{=URL('static', 'font-awesome-4.6.3/css/font-awesome.min.css')}}">
 
 {{block header}}
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
@@ -35,17 +34,17 @@
           <button v-on:click="showPost(post._idx)" class="fa fa-plus"> Show More </button>
         </div>
       
-        <div id = "postys" style= "display :none"> 
+        <div id = "postys"> 
 
           <div id = "hide_button">
             <button v-on:click="hidePost(post._idx)" class="fa fa-minus"> Hide Post </button>
           </div>
 
           <div v-if="!post.editing">
-            <p>Author: ${ post.author} </p>
+            <p>Username: ${ post.author } </p>
             <p>Title: ${ post.title }</p>
             <p>Content: ${ post.post_content }</p>
-            <p>Category: ${post.category}</p>
+            <p>Category: ${ post.category }</p>
             <button> <i class="fa fa-pencil-square-o" v-on:click="editPost(post._idx)"> Edit</i> </button>
           </div>
 
@@ -104,7 +103,7 @@
                     <textarea v-model="newPostContent" cols="50" id="post" name="post" placeholder="Enter content *" rows="7" required type="text"></textarea>
                   </div>
                 </div>
-                Select Category  <select name="category" onchange = "getCategory()">
+                Select Category  <select name="category" class="form-control" v-model="newCategory">
                   <option value="Sports">Sports</option>
                   <option value="News">News</option>
                   <option value="Arts">Arts</option>

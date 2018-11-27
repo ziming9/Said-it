@@ -21,7 +21,8 @@ var loadFile = function(event) {
 var insertPost = function() {
     var newPost = {
         title: app.newPostTitle,
-        post_content: app.newPostContent
+        post_content: app.newPostContent,
+        category: app.newCategory
     };
     $.post(insertPostUrl, newPost, function(response) { 
         newPost['id'] = response.new_post_id;
@@ -39,18 +40,12 @@ var savePost = function(idx) {
     var newPost = {
         id: app.posts[idx].id,
         title: app.posts[idx].title,
-        post_content: app.posts[idx].post_content
+        post_content: app.posts[idx].post_content,
     };
     $.post(editPostUrl, newPost, function(response) {
         onPageLoad();
     });
 };
-
-var getCategory = function () {
-    var categoryValue = document.getElementById("category").value;
-    document.getElementById("categoryText").innerHTML = "Category : " + categoryValue;
-
-}
 
 var onPageLoad = function() {
     $.getJSON(getPostsUrl,
@@ -79,16 +74,16 @@ var app = new Vue({
     data: {
         newPostTitle: "",
         newPostContent: "",
+        newCategory:"",
         posts: [],
-        search: '',
+        search: ''
     },
     methods: {
         submitPost: insertPost,
         editPost: editPost,
         savePost: savePost,
         showPost: showPost,
-        hidePost: hidePost,
-        getCategory: getCategory
+        hidePost: hidePost
     },
     computed: {
         filteredPosts: function() {
