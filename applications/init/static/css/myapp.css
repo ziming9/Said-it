@@ -3,6 +3,15 @@
     
     
 }
+.search-bar {
+    margin : auto;
+    width: 200px;
+}
+
+.categoryName {
+    margin-right: 600px;
+    border: solid;
+}
 .back {
     background: url(/init/static/images/yellow.jpg) center no-repeat;
    
