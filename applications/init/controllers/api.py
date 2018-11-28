@@ -1,4 +1,3 @@
-@auth.requires_login()
 def insert_post():
     new_post_id = db.posts.insert(
         title=request.vars.title,
