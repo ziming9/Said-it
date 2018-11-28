@@ -66,7 +66,6 @@ var hidePost = function() {
     $("#show_button").show();
 };
 
-
 var app = new Vue({
     el: '#app',
     delimiters: ['${','}'],

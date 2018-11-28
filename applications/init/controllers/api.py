@@ -1,7 +1,6 @@
 @auth.requires_login()
 def insert_post():
     new_post_id = db.posts.insert(
-        author=request.vars.author,
         title=request.vars.title,
         post_content=request.vars.post_content,
         category=request.vars.category
@@ -16,6 +15,7 @@ def get_all_posts():
     for post in posts:
         post_to_send = dict(
             id=post.id,
+            username=post.username,
             author=post.author,
             title=post.title,
             post_content=post.post_content,
@@ -26,7 +26,9 @@ def get_all_posts():
 
     return response.json(dict(posts=post_list))
 
+@auth.requires_login()
 def edit_posts():
+
     db.posts.update_or_insert(db.posts.id == request.vars.id,
         title=request.vars.title,
         post_content=request.vars.post_content

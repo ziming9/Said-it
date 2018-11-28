@@ -3,6 +3,13 @@
     
     
 }
+
+.search-bar {
+    margin: auto;
+    width: 200px;
+}
+
+
 .back {
     background: url(/init/static/images/yellow.jpg) center no-repeat;
    

@@ -16,7 +16,7 @@ response.menu = [
 if not configuration.get('app.production'):
     _app = request.application
     response.menu += [
-        (T('Categories'), False, URL('init', 'default', 'index  ')),
+        (T('Categories'), False, URL('init', 'default', 'index')),
         (T('This App'), False, '#', [
             (T('Database'), False, URL(_app, 'appadmin', 'index')),
         ]),
