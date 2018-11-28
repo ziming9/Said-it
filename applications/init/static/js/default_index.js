@@ -2,6 +2,7 @@ var enumerate = function(arr) {
     var k=0; return arr.map(function(e) {
         e._idx = k++;
         Vue.set(e, 'editing', false);
+        Vue.set(e,'showPostStatus', false);
     });
 };
 
@@ -56,14 +57,18 @@ var onPageLoad = function() {
     );
 };
 
-var showPost = function() {
-    $("#postys").show();
-    $("#show_button").hide();
+var showPost = function(idx) {
+    var id = app.posts[idx].id;
+    var url = showPostUrl + '?id=' + id;
+    app.posts[idx].showPostStatus = true;
+
+    $.post(url, function(response) {
+        app.posts[idx].posts = response.posts;
+    })
 };
 
-var hidePost = function() {
-    $("#postys").hide();
-    $("#show_button").show();
+var hidePost = function(idx) {
+    app.posts[idx].showPostStatus = false;
 };
 
 var app = new Vue({
@@ -73,9 +78,10 @@ var app = new Vue({
     data: {
         newPostTitle: "",
         newPostContent: "",
-        newCategory:"",
+        newCategory: "",
         posts: [],
-        search: ''
+        search: '',
+        showPostStatus: false
     },
     methods: {
         submitPost: insertPost,

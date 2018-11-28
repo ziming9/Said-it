@@ -9,6 +9,7 @@
   var editPostUrl = "{{=URL('api', 'edit_posts')}}";
   var getImageUrl = "{{=URL('api', 'myform')}}";
   var deleteUrl = "{{=URL('api', 'delete_post')}}";
+  var showPostUrl = "{{=URL('api', 'show_posts')}}";
 </script>
 
 
@@ -33,16 +34,15 @@
       <div v-for="post in filteredPosts" class="post-box center">
         
         
-          <div id = "show_button">
+          <div v-if="!post.showPostStatus">
             <p>Title: ${ post.title }<p>
             <button v-on:click="showPost(post._idx)" class="fa fa-plus"> Show More </button>
           </div>
         
-          <div id = "postys"> 
+           
 
-            <div id = "hide_button">
+          <div v-if="post.showPostStatus">
               <button v-on:click="hidePost(post._idx)" class="fa fa-minus"> Hide Post </button>
-            </div>
 
             <div v-if="!post.editing">
               
@@ -69,9 +69,8 @@
 
             <div class = "categoryName" >
               Category: ${ post.category }
-            </div>
-        </div>  
-
+            </div>  
+          </div>
             <!--
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#postcontentModal">Expand</button>
       

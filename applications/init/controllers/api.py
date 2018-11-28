@@ -21,7 +21,7 @@ def get_all_posts():
             category=post.category
         )
         
-        post_list.append(post_to_send)
+        post_list.append(post_to_send)  
 
     return response.json(dict(posts=post_list))
 
@@ -34,4 +34,6 @@ def edit_posts():
     )
     return "post edited!"
 
-
+def show_posts():
+    posts = db(db.posts.id == request.vars.id).select()
+    return response.json(dict(posts=posts))
