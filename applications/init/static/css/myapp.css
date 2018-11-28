@@ -6,8 +6,38 @@
 .search-bar {
     margin : auto;
     width: 200px;
+
+}
+.animation{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    animation-name: example;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
 }
 
+@keyframes example {
+    0%   {background:url(/init/static/images/signup.jpg); left:370px; top:0px; background-size:100%}
+    25%  {background:url(/init/static/images/addpost.png); left:480px; top:0px;background-size:100%}
+    50%  {background:url(/init/static/images/look.png); left:650px; top:000px;background-size:120%}
+    75%  {background:url(/init/static/images/havefun.jpg); left:850px; top:000px;background-size:100px 100px}
+    100%   {background:url(/init/static/images/signup.jpg); left:300px; top:0px; background-size:100%}
+}
+.addBox {
+    font-size: 16px;
+    color : black;
+    border: 3px solid black;
+    margin: auto;
+    width: 300px;
+    height : 140px;
+    background:url(/init/static/images/logo2.png) top left no-repeat;
+    background-position: 80px -10px;
+}
+.btn-info {
+    width: 295px;
+    text-align: center;
+}
 .categoryName {
     margin-right: 600px;
     border: solid;

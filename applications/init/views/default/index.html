@@ -20,17 +20,32 @@
     <!-- Search bar-->
     <div class="search-bar">
       <form class="form-inline my-2 my-lg-0">
-          <input class="form-control sm-2" type="text" v-model="search" placeholder="Search post"/>
+        <input class="form-control sm-2" type="text" v-model="search" placeholder="Search post"/>
       </form>
     </div>
 
+    <div class = "animationText center">   
+      Sign up &emsp;&emsp;&emsp;&emsp;&emsp;
+      Add Post &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      Look at posts &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      Have fun
+    </div>
+    <div class = "animation center"></div>
+
+      
   
 
     <!-- Display/Edit Post form Here -->
     <div class="posts" >
+      <div class = "addBox">
+        Welcome to <br>
+        where you can create your own post<br>
+        and view other user's posts. Get started<br>
+        by adding your own very post here!<br>
         <button type="addpost" class="btn btn-info right" data-toggle="modal" data-target="#addpostModal">
           Add Post
         </button> <br> <br>
+      </div>
       <div v-for="post in filteredPosts" class="post-box center">
         
         
