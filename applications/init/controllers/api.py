@@ -1,3 +1,4 @@
+@auth.requires_login()
 def insert_post():
     new_post_id = db.posts.insert(
         title=request.vars.title,
@@ -26,6 +27,7 @@ def get_all_posts():
     return response.json(dict(posts=post_list))
 
 @auth.requires_login()
+@auth.requires_signature()
 def edit_posts():
 
     db.posts.update_or_insert(db.posts.id == request.vars.id,
