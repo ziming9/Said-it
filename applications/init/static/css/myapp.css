@@ -22,6 +22,11 @@
     75%  {background:url(/init/static/images/havefun.jpg); left:850px; top:000px;background-size:100px 100px}
     100%   {background:url(/init/static/images/signup.jpg); left:300px; top:0px; background-size:100%}
 }
+.topButton {
+    position :fixed;
+    bottom : 75px;
+    right: 50px;
+}
 .addBox {
     font-size: 16px;
     color : black;
