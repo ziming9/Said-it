@@ -30,10 +30,11 @@
     right: 50px;
 }
 .addBox {
+    position:fixed;
     font-size: 16px;
     color : black;
     border: 3px solid black;
-    margin: auto;
+    margin-left: 875px;
     width: 300px;
     height : 140px;
     background:url(/init/static/images/logo2.png) top left no-repeat;
@@ -67,7 +68,7 @@
 }
 
 .post-box {
-    margin :auto;
+    margin-left:100px;
     border: 1px solid black;
     width: 700px;
     padding: 15px;
