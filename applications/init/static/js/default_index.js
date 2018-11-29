@@ -71,6 +71,7 @@ var hidePost = function(idx) {
     app.posts[idx].showPostStatus = false;
 };
 
+
 var app = new Vue({
     el: '#app',
     delimiters: ['${','}'],
@@ -88,7 +89,8 @@ var app = new Vue({
         editPost: editPost,
         savePost: savePost,
         showPost: showPost,
-        hidePost: hidePost
+        hidePost: hidePost,
+        
     },
     computed: {
         filteredPosts: function() {
