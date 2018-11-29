@@ -5,11 +5,13 @@
 
 <script>
   var getPostsUrl = "{{=URL('api', 'get_all_posts')}}";
-  var insertPostUrl = "{{=URL('api', 'insert_post')}}";
-  var editPostUrl = "{{=URL('api', 'edit_posts')}}";
+  var insertPostUrl = "{{=URL('api', 'insert_post', user_signature=True)}}";
+  var editPostUrl = "{{=URL('api', 'edit_posts', user_signature=True)}}";
   var getImageUrl = "{{=URL('api', 'myform')}}";
   var deleteUrl = "{{=URL('api', 'delete_post')}}";
   var showPostUrl = "{{=URL('api', 'show_posts')}}";
+
+  var useremail = "{{='' if auth.user is None else auth.user.email}}";
 </script>
 
 
@@ -44,33 +46,33 @@
         by adding your own very post here!<br>
         <button type="addpost" class="btn btn-info right" data-toggle="modal" data-target="#addpostModal">
           Add Post
-        </button> <br> <br>
+        </button> <br><br>
       </div>
       <div v-for="post in filteredPosts" class="post-box center">
         
         
           <div v-if="!post.showPostStatus">
-            <p>Title: ${ post.title }<p>
-            <button v-on:click="showPost(post._idx)" class="fa fa-plus"> Show More </button>
+            <h1>${ post.title }</h1>
+            <button v-on:click="showPost(post._idx)" class="fa fa-plus-square"> Show More </button>
           </div>
         
-           
-
           <div v-if="post.showPostStatus">
               <button v-on:click="hidePost(post._idx)" class="fa fa-minus"> Hide Post </button>
 
             <div v-if="!post.editing">
               
               <p>Username: ${ post.author } </p>
-              <p>Title: ${ post.title }</p>
-              <p>Content: ${ post.post_content }</p>
+              <p>${ post.post_content }</p>
               
-              <button> <i class="fa fa-pencil-square-o" v-on:click="editPost(post._idx)"> Edit</i> </button>
+              <div v-if="useremail == post.author">
+                <button> <i class="fa fa-pencil-square-o" v-on:click="editPost(post._idx)"> Edit</i> </button>
+              </div>
             </div>
 
             <div v-if="post.editing">
-              <input type="text" v-model="post.title"/>
-              <textarea v-model="post.post_content"></textarea>
+              <br>
+              <input type="text" v-model="post.title"/><br><br>
+              <textarea cols="50" rows="7" v-model="post.post_content"></textarea><br>
               <button v-on:click="savePost(post._idx)">Save</button>
             </div>
             
