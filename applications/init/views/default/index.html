@@ -83,9 +83,12 @@
             <a href="{{=URL('default', 'myform')}}" class="btn">Add Image</a>
 
             <!-- 2nd way to add-->
-            <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
-            <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
-            <p><img id="output" width="170" /></p>
+            <div class = "addingImages center">
+              <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+              <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
+              <p><img id="output" width="170" /></p>
+            </div>
+            
 
             <div class = "categoryName" >
               Category: ${ post.category }
