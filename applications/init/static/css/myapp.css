@@ -1,11 +1,13 @@
 .posts {
     display: block;
 }
+
 .search-bar {
     margin : auto;
     width: 200px;
 
 }
+
 .animation{
     width: 100px;
     height: 100px;
@@ -22,33 +24,40 @@
     75%  {background:url(/init/static/images/havefun.jpg); left:850px; top:000px;background-size:100px 100px}
     100%   {background:url(/init/static/images/signup.jpg); left:300px; top:0px; background-size:100%}
 }
+
 .topButton {
     position :fixed;
     bottom : 75px;
     right: 50px;
 }
+
 .addBox {
-    position:fixed;
+    padding: 8px;
+    border-radius: 15px 50px;
+    position: fixed;
     font-size: 16px;
     color : black;
-    border: 3px solid black;
-    margin-left: 875px;
+    border: 2px solid black;
+    margin-left: 1050px;
     width: 300px;
-    height : 140px;
-    background:url(/init/static/images/logo2.png) top left no-repeat;
-    background-position: 80px -10px;
+    height: 160px;
+    background: url(/init/static/images/logo2.png) top left no-repeat;
+    background-position: 100px -7px;
+    
 }
+
 .btn-info {
-    width: 295px;
-    text-align: center;
+    font-family: Verdana;
+    margin-right: 100px;
 }
+
 .categoryName {
     margin-right: 600px;
     border: solid;
 }
+
 .back {
     background: url(/init/static/images/yellow.jpg) center no-repeat;
-   
     background-size: cover;
     height : 100%;
     margin : 0px;
@@ -61,26 +70,25 @@
 }
 
 .post-title {
-    font-size: 20px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.post-content {
+    font-size: 15px;
     text-align: center;
 }
 
 .post-box {
-    margin-left:100px;
+    border-radius: 25px;
+    margin-left:300px;
     border: 1px solid black;
     width: 700px;
     padding: 15px;
     align-content: center;
     background-size: 100%;
     background-color: rgba(255,255,255,0.5); 
-    
-}
-
-.post-box a {
-    top: 5px;
-    display: block;
-    margin: auto;
-    text-align: center;
+    font-family: Verdana;
 }
 
 .copyright {
