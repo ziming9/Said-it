@@ -82,7 +82,8 @@ var app = new Vue({
         newCategory: "",
         posts: [],
         search: '',
-        showPostStatus: false
+        showPostStatus: false,
+        useremail: useremail
     },
     methods: {
         submitPost: insertPost,
