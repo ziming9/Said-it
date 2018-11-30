@@ -96,14 +96,10 @@ var app = new Vue({
     computed: {
         filteredPosts: function() {
             return this.posts.filter((post) => {
-                return post.title.match(this.search);
+                return post.title.match(this.search) || post.category.match(this.search);
             })
         },
-        filteredCategory: function() {
-            return this.posts.filter((post) => {
-                return post.category.match(this.search);
-            })
-        }
+      
     }
 });
 

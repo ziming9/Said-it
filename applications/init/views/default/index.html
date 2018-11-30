@@ -25,7 +25,7 @@
     <!-- Search bar-->
     <div class="search-bar">
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control sm-2" type="text" v-model="search" placeholder="Search post"/>
+        <input class="form-control sm-3" type="text" v-model="search" placeholder="Search by title or category"/>
       </form>
     </div>
 
@@ -57,16 +57,23 @@
               <h3>${ post.title }</h3>
               <i v-on:click="showPost(post._idx)" class="fa fa-plus-square"></i>
             </div>
+            <div class ="categoryName-before">${ post.category } </div>
           </div>
           
           <div v-if="post.showPostStatus">
+            <div class = "hideButton center">
               <i v-on:click="hidePost(post._idx)" class="fa fa-minus"> Hide Post </i>
-
+            </div>
             <div v-if="!post.editing">
               
               <div class="post-content">
-                <p>Username: ${ post.author } </p>
-                <p>${ post.post_content }</p>
+                <div class="post-titleAfter">
+                  <h3 align = "left">${post.title}</h3> 
+                </div>
+                <div class="post-contentAfter">
+                  <p align = "left">${ post.post_content }</p>
+                </div>
+                
                 <div v-if="useremail == post.author">
                   <button class="fa fa-pencil-square-o" v-on:click="editPost(post._idx)"> Edit</button>
                 </div>
@@ -82,7 +89,7 @@
             </div>
             
             <!--New add image button-->
-            <a href="{{=URL('default', 'myform')}}" class="btn">Add Image</a>
+            <!---<a href="{{=URL('default', 'myform')}}" class="btn">Add Image</a> ->
 
             <!-- 2nd way to add-->
             <div class = "addingImages center">
@@ -91,10 +98,14 @@
               <p><img id="output" width="170" /></p>
             </div>
             
-
-            <div class = "categoryName" >
-              Category: ${ post.category }
-            </div>  
+            <div class = "postBottom">
+              <div class = "categoryName" >
+                ${ post.category }
+              </div>
+              <div class = "postedName ">
+                <p align ="center"> Posted by ${ post.author} </p>
+              </div>
+            </div>
           </div>
             <!--
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#postcontentModal">Expand</button>
