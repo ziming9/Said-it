@@ -32,6 +32,17 @@ var insertPost = function() {
     });
 };
 
+var deletePost = function(idx) {
+    $.post(deletePostUrl, 
+        { id: app.posts[idx].id }, 
+        function() {
+            app.posts.splice(idx,1);
+            if(app.posts.length <= 99)
+                app.processPosts();
+            enumerate(app.posts);
+        })
+}
+
 var editPost = function(idx) {
     app.posts[idx].editing = true;
 };

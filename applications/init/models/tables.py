@@ -10,7 +10,7 @@ def get_current_time():
     return datetime.datetime.utcnow()
 
 db.define_table('posts',
-                Field('username', default=get_user_name()),
+                Field('user_name', 'string'),
                 Field('author', default=get_user_email()),
                 Field('title'),
                 Field('post_content', 'text'),  
