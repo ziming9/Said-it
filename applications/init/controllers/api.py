@@ -1,9 +1,9 @@
 def get_user_name(email):
-    u = db(db.auth.user.email == email).select().first()
+    u = db(db.auth_user.email == email).select().first()
     if u is None:
         return 'None'
     else:
-        return ''.join([u.first_name, u.last_name])
+        return ' '.join([u.first_name, u.last_name])
 
 @auth.requires_signature()
 def insert_post():
@@ -28,8 +28,8 @@ def get_all_posts():
     for post in posts:
         post_to_send = dict(
             id=post.id,
-            user_name=get_user_name(post.author),
             author=post.author,
+            user_name=get_user_name(post.author),
             title=post.title,
             post_content=post.post_content,
             category=post.category

@@ -8,18 +8,18 @@
   var insertPostUrl = "{{=URL('api', 'insert_post', user_signature=True)}}";
   var editPostUrl = "{{=URL('api', 'edit_posts', user_signature=True)}}";
   var getImageUrl = "{{=URL('api', 'myform')}}";
-  var deleteUrl = "{{=URL('api', 'delete_post')}}";
+  var deleteUrl = "{{=URL('api', 'delete_post', user_signature=True)}}";
   var showPostUrl = "{{=URL('api', 'show_posts')}}";
 
   var useremail = "{{='' if auth.user is None else auth.user.email}}";
 </script>
-
+{{end}}
 
 <div class = "back">
     
   <div id="app">
     <div class = "topButton">
-      <button><a id="back2Top" title="Back to top" class = "fa fa-caret-square-o-up" href="#"> Go back to Top</a> </button>
+      <button><a id="back2Top" title="Back to top" class = "fa fa-caret-square-o-up" href="#"> Go Back to Top</a> </button>
     </div>
 
     <!-- Search bar-->
@@ -76,6 +76,7 @@
                 
                 <div v-if="useremail == post.author">
                   <button class="fa fa-pencil-square-o" v-on:click="editPost(post._idx)"> Edit</button>
+                  <button class="fa fa-trash-o" v-on:click="deletePost(post._idx)"> Delete</button>
                 </div>
               </div>
               
@@ -103,7 +104,7 @@
                 ${ post.category }
               </div>
               <div class = "postedName ">
-                <p align ="center"> Posted by ${ post.author} </p>
+                <p align ="center"> Posted by ${ post.user_name} </p>
               </div>
             </div>
           </div>

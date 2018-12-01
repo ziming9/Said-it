@@ -33,7 +33,7 @@ var insertPost = function() {
 };
 
 var deletePost = function(idx) {
-    $.post(deletePostUrl, 
+    $.post(deleteUrl, 
         { id: app.posts[idx].id }, 
         function() {
             app.posts.splice(idx,1);
@@ -93,6 +93,16 @@ var app = new Vue({
         newCategory: "",
         posts: [],
         search: '',
+        searchSports: 'Sports',
+        searchNews: 'News',
+        searchArts: 'Arts',
+        searchEnt: 'Entertainment',
+        searchHist: 'History',
+        searchPoltc: 'Politics',
+        searchBlog: 'Blog',
+        searchEdu: 'Education',
+        searchReli: 'Religion',
+        searchTech: 'Technology',
         showPostStatus: false,
         useremail: useremail
     },
@@ -102,12 +112,63 @@ var app = new Vue({
         savePost: savePost,
         showPost: showPost,
         hidePost: hidePost,
+        deletePost: deletePost
         
     },
     computed: {
         filteredPosts: function() {
             return this.posts.filter((post) => {
                 return post.title.match(this.search) || post.category.match(this.search);
+            })
+        },
+        sportPosts: function() {
+            return this.posts.filter((post) => {
+                return post.category.match(this.searchSports);
+            })
+        },
+        newsPosts: function() {
+            return this.posts.filter((post) => {
+                return post.category.match(this.searchNews);
+            })
+        },
+        artsPosts: function() {
+            return this.posts.filter((post) => {
+                return post.category.match(this.searchArts);
+            })
+        },
+        entPosts: function() {
+            return this.posts.filter((post) => {
+                return post.category.match(this.searchEnt);
+            })
+        },
+        histPosts: function() {
+            return this.posts.filter((post) => {
+                return post.category.match(this.searchHist);
+            })
+        },
+        poltcPosts: function() {
+            return this.posts.filter((post) => {
+                return post.category.match(this.searchPoltc);
+            })
+        },
+        blogPosts: function() {
+            return this.posts.filter((post) => {
+                return post.category.match(this.searchBlog);
+            })
+        },
+        eduPosts: function() {
+            return this.posts.filter((post) => {
+                return post.category.match(this.searchEdu);
+            })
+        },
+        reliPosts: function() {
+            return this.posts.filter((post) => {
+                return post.category.match(this.searchReli);
+            })
+        },
+        techPosts: function() {
+            return this.posts.filter((post) => {
+                return post.category.match(this.searchTech);
             })
         },
       

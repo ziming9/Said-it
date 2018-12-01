@@ -11,7 +11,7 @@ def get_current_time():
 
 db.define_table('posts',
                 Field('user_name', 'string'),
-                Field('author', default=get_user_email()),
+                Field('author', default=auth.user.email if auth.user_id else None),
                 Field('title'),
                 Field('post_content', 'text'),  
                 Field('category'),             

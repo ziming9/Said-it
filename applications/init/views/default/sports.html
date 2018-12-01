@@ -1,0 +1,179 @@
+{{extend 'layout.html'}}
+
+{{block header}}
+<script src="{{=URL('static', 'js/vue.js')}}"></script>
+
+<script>
+  var getPostsUrl = "{{=URL('api', 'get_all_posts')}}";
+  var insertPostUrl = "{{=URL('api', 'insert_post', user_signature=True)}}";
+  var editPostUrl = "{{=URL('api', 'edit_posts', user_signature=True)}}";
+  var getImageUrl = "{{=URL('api', 'myform')}}";
+  var deleteUrl = "{{=URL('api', 'delete_post', user_signature=True)}}";
+  var showPostUrl = "{{=URL('api', 'show_posts')}}";
+
+  var useremail = "{{='' if auth.user is None else auth.user.email}}";
+</script>
+{{end}}
+
+<div class = "back">
+    
+  <div id="app">
+    <div class = "topButton">
+      <button><a id="back2Top" title="Back to top" class = "fa fa-caret-square-o-up" href="#"> Go back to Top</a> </button>
+    </div>
+
+    <!-- Search bar-->
+    <div class="search-bar">
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control sm-3" type="text" v-model="search" placeholder="Search by title or category"/>
+      </form>
+    </div>
+
+    <div class = "animationText center">   
+      Sign up &emsp;&emsp;&emsp;&emsp;&emsp;
+      Add Post &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      Look at posts &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      Have fun
+    </div>
+    <div class = "animation center"></div>
+
+
+    <!-- Display/Edit Post form Here -->
+
+    <div class="posts" >
+      <div class = "addBox">
+        Welcome to <br>
+        where you can create your own post<br>
+        and view other user's posts. Get started<br>
+        by adding your own very post here!<br>
+        <button type="addpost" class="btn btn-info right" data-toggle="modal" data-target="#addpostModal">
+          Add Post
+        </button> <br><br>
+      </div>
+      <div v-for="post in sportPosts" class="post-box">
+        
+          <div v-if="!post.showPostStatus">
+            <div class="post-title">
+              <h3>${ post.title }</h3>
+              <i v-on:click="showPost(post._idx)" class="fa fa-plus-square"></i>
+            </div>
+            <div class ="categoryName-before">${ post.category } </div>
+          </div>
+          
+          <div v-if="post.showPostStatus">
+            <div class = "hideButton center">
+              <i v-on:click="hidePost(post._idx)" class="fa fa-minus"> Hide Post </i>
+            </div>
+            <div v-if="!post.editing">
+              
+              <div class="post-content">
+                <div class="post-titleAfter">
+                  <h3 align = "left">${post.title}</h3> 
+                </div>
+                <div class="post-contentAfter">
+                  <p align = "left">${ post.post_content }</p>
+                </div>
+                
+                <div v-if="useremail == post.author">
+                  <button class="fa fa-pencil-square-o" v-on:click="editPost(post._idx)"> Edit</button>
+                  <button class="fa fa-trash-o" v-on:click="deletePost(post._idx)"> Delete</button>
+                </div>
+              </div>
+              
+            </div>
+
+            <div v-if="post.editing">
+              <br>
+              <input type="text" v-model="post.title"/><br><br>
+              <textarea cols="50" rows="7" v-model="post.post_content"></textarea><br>
+              <button v-on:click="savePost(post._idx)">Save</button>
+            </div>
+            
+            <!--New add image button-->
+            <!---<a href="{{=URL('default', 'myform')}}" class="btn">Add Image</a> ->
+
+            <!-- 2nd way to add-->
+            <div class = "addingImages center">
+              <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+              <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
+              <p><img id="output" width="170" /></p>
+            </div>
+            
+            <div class = "postBottom">
+              <div class = "categoryName" >
+                ${ post.category }
+              </div>
+              <div class = "postedName ">
+                <p align ="center"> Posted by ${ post.user_name} </p>
+              </div>
+            </div>
+          </div>
+            <!--
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#postcontentModal">Expand</button>
+      
+            <div class="modal fade" id="postcontentModal" role="dialog">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">${ post.title }</h4>
+              </div>
+              <div class="modal-body">
+                <p>${ post.post_content }</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            -->
+        
+      </div>
+    </div>
+    
+
+    <div class="modal fade" id="addpostModal" tabindex="-1" role="dialog" aria-labelledby="addpostLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="addposttitle">Add Post</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <!-- Edit add post form here -->
+                <div class="row">
+                  <div class="form-group col-6">
+                    <input v-model="newPostTitle" id="postname" placeholder="Title *" required type="text">
+                  </div>
+                  <div class="form-group col-9">
+                    <textarea v-model="newPostContent" cols="50" id="post" name="post" placeholder="Enter content *" rows="7" required></textarea>
+                  </div>
+                </div>
+                Select Category  <select required name="category" class="form-control" v-model="newCategory">
+                  <option value="Sports">Sports</option>
+                  <option value="News">News</option>
+                  <option value="Arts">Arts</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="History">History</option>
+                  <option value="Politics">Politics</option>
+                  <option value="Blog">Blog</option>
+                  <option value="Education">Education</option>
+                  <option value="Religion">Religion</option>
+                  <option value="Technology">Technology</option>
+                </select>
+                
+              </div>
+
+              <div class="modal-footer">
+                <button v-on:click="submitPost" class="btn btn-outline-info" data-dismiss="modal">Add Post</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="{{=URL('static', 'js/default_index.js')}}"></script>
+</div>
+
+{{end}}

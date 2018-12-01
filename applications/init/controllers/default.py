@@ -11,9 +11,35 @@ def index():
     return dict(message=T('Welcome to said-it!'))
 
 
+def sports():
+    return dict(message=T('Sports'))
 
+def news():
+    return dict(message=T('News'))
 
+def arts():
+    return dict(message=T('Arts'))
 
+def entertainment():
+    return dict(message=T('Entertainment'))
+
+def history():
+    return dict(message=T('History'))
+
+def politics():
+    return dict(message=T('Politics'))
+
+def blog():
+    return dict(message=T('Blogs'))
+
+def education():
+    return dict(message=T('Education'))
+
+def religion():
+    return dict(message=T('Religion'))
+
+def technology():
+    return dict(message=T('Technology'))
 
 
 @auth.requires_login()
