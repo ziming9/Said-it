@@ -1,3 +1,4 @@
+
 var enumerate = function(arr) {
     var k=0; return arr.map(function(e) {
         e._idx = k++;
@@ -118,7 +119,7 @@ var app = new Vue({
     computed: {
         filteredPosts: function() {
             return this.posts.filter((post) => {
-                return post.title.match(this.search) || post.category.match(this.search);
+                return post.title.toLowerCase().match(this.search.toLowerCase()) || post.category.match(this.search);
             })
         },
         sportPosts: function() {
