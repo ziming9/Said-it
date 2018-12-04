@@ -14,13 +14,19 @@ db.define_table('posts',
                 Field('author', default=auth.user.email if auth.user_id else None),
                 Field('title'),
                 Field('post_content', 'text'),  
-                Field('category'),             
+                Field('category'),     
+                Field('image', 'upload'),        
                 )
 
 #db.define_table('image',
 #               Field('title'),
 #               Field('fileName ','upload'),
 #               format = '%(title)s')
+
+db.define_table('my_images',
+    Field('image_str', 'text'),
+    Field('blog_post_id', 'integer'), # Should be a reference to a blog post I guess. 
+)
                 
 db.define_table('image', Field('fileName', 'upload', 
 required=True, notnull=True, requires = IS_NOT_EMPTY()))
