@@ -42,12 +42,8 @@ def technology():
     return dict(message=T('Technology'))
 
 
-@auth.requires_login()
-def add_post():
-    form = SQLFORM(db.post)
-    if form.process().accepted:
-        redirect(URL('default', 'index'))
-    return dict(form=form)
+
+
 
 
 @auth.requires_login()
