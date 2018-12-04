@@ -119,7 +119,7 @@ var app = new Vue({
     computed: {
         filteredPosts: function() {
             return this.posts.filter((post) => {
-                return post.title.toLowerCase().match(this.search.toLowerCase()) || post.category.match(this.search);
+                return post.title.toLowerCase().match(this.search.toLowerCase());
             })
         },
         sportPosts: function() {
