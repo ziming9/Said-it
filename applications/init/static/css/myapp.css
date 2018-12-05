@@ -1,5 +1,6 @@
 .posts {
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .search-bar {
@@ -42,7 +43,8 @@
     width: 300px;
     height: 160px;
     background: url(/init/static/images/logo2.png) top left no-repeat;
-    background-position: 100px -7px;
+    top: 250px;
+    right : 50px;
     
 }
 
