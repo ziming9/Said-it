@@ -130,7 +130,6 @@ var getImage = function () {
         )
 };
 
-
 var app = new Vue({
     el: '#app',
     delimiters: ['${','}'],
@@ -170,7 +169,7 @@ var app = new Vue({
     computed: {
         filteredPosts: function() {
             return this.posts.filter((post) => {
-                return post.title.toLowerCase().match(this.search.toLowerCase()) || post.category.match(this.search);
+                return post.title.toLowerCase().match(this.search.toLowerCase()) || post.category.toLowerCase().match(this.search.toLowerCase());
             })
         },
         sportPosts: function() {
