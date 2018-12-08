@@ -1,20 +1,20 @@
 def get_user_name(email):
     u = db(db.auth_user.email == email).select().first()
     if u is None:
-        return 'None'
+        return 'Anonymous'
     else:
         return ' '.join([u.first_name, u.last_name])
 
 
 @auth.requires_signature()
 def insert_post():
-    new_post_id = db.posts.insert(
+    post_id = db.posts.insert(
         user_name=get_user_name(request.vars.email),
         title=request.vars.title,
         post_content=request.vars.post_content,
         category=request.vars.category
     )
-    return response.json(dict(new_post_id=new_post_id))
+    return response.json(dict(post_id=post_id))
 
 
 @auth.requires_signature()
@@ -89,10 +89,19 @@ def add_post():
     return dict(form=form)
 
 
+def get_comment():
+    post_id=int(request.vars.post_id)
+    data = db(db.comments.post_id==post_id).select(db.comments.ALL, orderby=~db.comments.comment_time)
+    print data
+    return response.json(dict(comment_list=data))
+
+
 def add_comment():
-    new_comment_id = db.comments.insert(
+    post_id = int(request.vars.post_id)
+    db.comments.insert(
+        user_name=get_user_name(auth.user.email),
         comment_content=request.vars.comment_content,
-        author=request.vars.author,
-        user_name=get_user_name(request.vars.email),
+        post_id=post_id,
+        author=auth.user.email
     )
-    return response.json(dict(new_comment_id=new_comment_id))
+    return "ok"

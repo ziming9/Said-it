@@ -131,40 +131,52 @@ var getImage = function () {
         )
 };
 
-var addCommentButton = function(index) {
-    app.adding_comment = !app.adding_comment;
-    app.index = index;
-};
-
-var addComment = function(index) {
-    app.index = index;
-    $.post(commentUrl,
-        {
-            comment_content: app.newComment,
-            author: app.posts.author,
-            index: app.index,
-        },
-        function (response) {
-            app.comments.unshift(response.comment);
-
-            if(app.comments.length > 100) {
-                app.comments.splice((100-app.comments.length),(app.comments.length - 100));
-                if(app.has_more == false) {
-                    app.has_more == true;
-                }
+var commentClick = function(idx) {
+    if(app.index === idx) {
+        app.index = -1;
+        return;
+    }
+    app.index = idx;
+    var p = app.posts[idx];
+    $.post(getcommentUrl, {
+        post_id:p.id
+        }, function(response) {
+            for (var i in response.comment_list) {
+                var item = response.comment_list[i];
+                item.editing = false;
             }
-            app.newComment = "";
-            enumerate(app.comments);
-            location.reload();
+            app.comment_list = response.comment_list;
         });
 };
+
+var commentSubmit = function(idx) {
+    var p = app.posts[idx];
+    var content = app.newComment;
+    app.newComment = "";
+    $.post(addcommentUrl, {
+        post_id:p.id,
+        comment_content:content
+        
+    }, function (response) {
+        $.post(getcommentUrl, {
+            post_id:p.id
+        }, function (response) {
+            for (var i in response.comment_list) {
+                var item = response.comment_list[i];
+                item.editing = false;
+            }
+            app.comment_list = response.comment_list;
+        });
+    });
+};
+
 
 var app = new Vue({
     el: '#app',
     delimiters: ['${','}'],
     unsafeDelimiters: ['!{','}'],
     data: {
-        index: 0,
+        index: -1,
         img_url: null,
         received_image: null,
         newPostTitle: "",
@@ -172,7 +184,7 @@ var app = new Vue({
         newCategory: "",
         newComment: "",
         posts: [],
-        comments: [],
+        comment_list: [],
         has_more: false,
         adding_comment: false,
         search: '',
@@ -198,8 +210,8 @@ var app = new Vue({
         deletePost: deletePost,
         uploadFile: uploadFile,
         getImage: getImage,
-        addCommentButton: addCommentButton,
-        addComment: addComment
+        commentClick: commentClick,
+        commentSubmit: commentSubmit
         
     },
     computed: {

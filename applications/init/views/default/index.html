@@ -12,7 +12,8 @@
   var showPostUrl = "{{=URL('api', 'show_posts')}}";
   var image_post_url = "{{=URL('api', 'post_image')}}";
   var image_get_url = "{{=URL('api', 'get_image')}}";
-  var commentUrl = "{{=URL('api', 'add_comment')}}";
+  var getcommentUrl = "{{=URL('api', 'get_comment')}}";
+  var addcommentUrl = "{{=URL('api', 'add_comment')}}";
 
   var useremail = "{{='' if auth.user is None else auth.user.email}}";
 </script>
@@ -82,22 +83,61 @@
                   <button class="fa fa-trash-o" v-on:click="deletePost(post._idx)"> Delete</button>
                 </div>
 
-                <div class="comment-bar">
-                  <button v-if="!adding_comment" class="btn btn-danger btn-sm" v-on:click="addCommentButton(post._idx)"> Add new comment</button>
-                  <button v-if="adding_comment" class="btn btn-info btn-sm" v-on:click="addCommentButton()"> Cancel</button>
-                </div>
-
-                <div class="comment-section">
-                  <div v-if="adding_comment">
-                    <form action="#" v-on:submit.prevent="addComment(post._idx)">
-                      <textarea class="form-control string" v-model="newComment" placeholder="Your comment here!"></textarea>
-                      <input class="post-button btn btn-info btn-sm" value="Submit" type="submit">
-                    </form>
-                  </div>
-                </div>
-
               </div>
               
+
+
+              <div >
+                <button v-on:click="commentClick(post._idx)">
+                    ${index==post._idx?'Hide reply':'Reply / Show Replies'}
+                </button>
+                    <div class="comment_list" v-if="index==post._idx">
+                        <div>
+                            <div class="container form_row">
+                                <div class="label quarter">
+                                    Add your reply here:
+                                </div>
+                                <div class="form threequarters">
+                                    <textarea v-model="newComment" placeholder="Enter your reply here" class="comment_box"></textarea>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button v-on:click="commentSubmit(post._idx)">Add reply</button>
+                            </div>
+                        </div>
+                        <div class="commentitem" v-for="comment in comment_list">
+
+                            <div v-if="useremail==comment.author" style="float: left">
+                                <button class="fa fa-pencil-square-o" v-on:click="edit_reply_click(reply)">${comment.editing?'Submit':'Edit'}</button>
+                            </div>
+                            <div v-if="!comment.editing">
+                                <span>${comment.comment_content}</span> <span>${comment.user_name}</span>
+                            </div>
+
+<!--                                 <div class="reply_time" v-if="!reply.editing">
+                                <span class="post_content">${reply.reply_time}</span>
+                            </div> -->
+                            <div style="clear: both;">
+                                <div v-if="comment.editing" class="container form_row">
+                                    <div class="label quarter">
+                                        Reply Content:
+                                    </div>
+
+                                    <div class="form threequarters">
+                                        <input v-model="comment.newComment" placeholder="Enter reply content here"/>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+              
+
+
             </div>
 
             <div v-if="post.editing">
@@ -134,10 +174,10 @@
             
             <div class = "postBottom">
               <div class = "categoryName" >
-                ${ post.category }
+                ${post.category}
               </div>
               <div class = "postedName ">
-                <p align ="center"> Posted by ${ post.user_name} </p>
+                <p align ="center"> Posted by ${post.user_name} </p>
               </div>
             </div>
           </div>

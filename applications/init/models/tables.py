@@ -22,6 +22,8 @@ db.define_table('comments',
                 Field('author', default=auth.user.email if auth.user_id else None),
                 Field('user_name', 'string'),
                 Field('comment_content'),
+                Field('post_id'),
+                Field('comment_time', 'datetime', default=get_current_time())
                 )
 
 #db.define_table('image',
