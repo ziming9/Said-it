@@ -5,6 +5,7 @@ def get_user_name(email):
     else:
         return ' '.join([u.first_name, u.last_name])
 
+
 @auth.requires_signature()
 def insert_post():
     new_post_id = db.posts.insert(
@@ -15,10 +16,12 @@ def insert_post():
     )
     return response.json(dict(new_post_id=new_post_id))
 
+
 @auth.requires_signature()
 def delete_post():
     db(db.posts.id == request.vars.id).delete()
     return 'post deleted'
+
 
 def get_all_posts():
     posts = db(db.posts).select()   #get all posts entries in post table
@@ -39,6 +42,7 @@ def get_all_posts():
 
     return response.json(dict(posts=post_list))
 
+
 @auth.requires_signature()
 def edit_posts():
 
@@ -47,6 +51,7 @@ def edit_posts():
         post_content=request.vars.post_content
     )
     return "post edited!"
+
 
 def show_posts():
     posts = db(db.posts.id == request.vars.id).select()
@@ -76,10 +81,18 @@ def post_image():
     return "ok"
 
 
-
 @auth.requires_login()
 def add_post():
     form = SQLFORM(db.post)
     if form.process().accepted:
         redirect(URL('default', 'index'))
     return dict(form=form)
+
+
+def add_comment():
+    new_comment_id = db.comments.insert(
+        comment_content=request.vars.comment_content,
+        author=request.vars.author,
+        user_name=get_user_name(request.vars.email),
+    )
+    return response.json(dict(new_comment_id=new_comment_id))

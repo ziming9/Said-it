@@ -12,6 +12,7 @@
   var showPostUrl = "{{=URL('api', 'show_posts')}}";
   var image_post_url = "{{=URL('api', 'post_image')}}";
   var image_get_url = "{{=URL('api', 'get_image')}}";
+  var commentUrl = "{{=URL('api', 'add_comment')}}";
 
   var useremail = "{{='' if auth.user is None else auth.user.email}}";
 </script>
@@ -80,6 +81,21 @@
                   <button class="fa fa-pencil-square-o" v-on:click="editPost(post._idx)"> Edit</button>
                   <button class="fa fa-trash-o" v-on:click="deletePost(post._idx)"> Delete</button>
                 </div>
+
+                <div class="comment-bar">
+                  <button v-if="!adding_comment" class="btn btn-danger btn-sm" v-on:click="addCommentButton(post._idx)"> Add new comment</button>
+                  <button v-if="adding_comment" class="btn btn-info btn-sm" v-on:click="addCommentButton()"> Cancel</button>
+                </div>
+
+                <div class="comment-section">
+                  <div v-if="adding_comment">
+                    <form action="#" v-on:submit.prevent="addComment(post._idx)">
+                      <textarea class="form-control string" v-model="newComment" placeholder="Your comment here!"></textarea>
+                      <input class="post-button btn btn-info btn-sm" value="Submit" type="submit">
+                    </form>
+                  </div>
+                </div>
+
               </div>
               
             </div>

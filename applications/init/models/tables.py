@@ -18,6 +18,12 @@ db.define_table('posts',
                 Field('image', 'upload'),        
                 )
 
+db.define_table('comments',
+                Field('author', default=auth.user.email if auth.user_id else None),
+                Field('user_name', 'string'),
+                Field('comment_content'),
+                )
+
 #db.define_table('image',
 #               Field('title'),
 #               Field('fileName ','upload'),

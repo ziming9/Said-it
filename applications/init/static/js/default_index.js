@@ -31,6 +31,7 @@ var insertPost = function() {
         app.posts.push(newPost);
         processPosts();
     });
+    location.reload();
 };
 
 var deletePost = function(idx) {
@@ -39,7 +40,7 @@ var deletePost = function(idx) {
         function() {
             app.posts.splice(idx,1);
             if(app.posts.length <= 99)
-                app.processPosts();
+                processPosts();
             enumerate(app.posts);
         })
 }
@@ -130,18 +131,50 @@ var getImage = function () {
         )
 };
 
+var addCommentButton = function(index) {
+    app.adding_comment = !app.adding_comment;
+    app.index = index;
+};
+
+var addComment = function(index) {
+    app.index = index;
+    $.post(commentUrl,
+        {
+            comment_content: app.newComment,
+            author: app.posts.author,
+            index: app.index,
+        },
+        function (response) {
+            app.comments.unshift(response.comment);
+
+            if(app.comments.length > 100) {
+                app.comments.splice((100-app.comments.length),(app.comments.length - 100));
+                if(app.has_more == false) {
+                    app.has_more == true;
+                }
+            }
+            app.newComment = "";
+            enumerate(app.comments);
+            location.reload();
+        });
+};
 
 var app = new Vue({
     el: '#app',
     delimiters: ['${','}'],
     unsafeDelimiters: ['!{','}'],
     data: {
+        index: 0,
         img_url: null,
         received_image: null,
         newPostTitle: "",
         newPostContent: "",
         newCategory: "",
+        newComment: "",
         posts: [],
+        comments: [],
+        has_more: false,
+        adding_comment: false,
         search: '',
         searchSports: 'Sports',
         searchNews: 'News',
@@ -165,6 +198,8 @@ var app = new Vue({
         deletePost: deletePost,
         uploadFile: uploadFile,
         getImage: getImage,
+        addCommentButton: addCommentButton,
+        addComment: addComment
         
     },
     computed: {
