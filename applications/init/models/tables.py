@@ -7,7 +7,7 @@ def get_user_email():
     return None if auth.user is None else auth.user.email
 
 def get_current_time():
-    return datetime.datetime.utcnow()
+    return datetime.datetime.now() + datetime.timedelta(seconds = 60 * 3.4)
 
 db.define_table('posts',
                 Field('user_name', 'string'),
@@ -15,13 +15,14 @@ db.define_table('posts',
                 Field('title'),
                 Field('post_content', 'text'),  
                 Field('category'),     
-                Field('image', 'upload'),        
+                Field('image', 'upload'),
+                Field('post_time', 'datetime', default=get_current_time())     
                 )
 
 db.define_table('comments',
                 Field('author', default=auth.user.email if auth.user_id else None),
                 Field('user_name', 'string'),
-                Field('comment_content'),
+                Field('comment_content', 'text'),
                 Field('post_id'),
                 Field('comment_time', 'datetime', default=get_current_time())
                 )

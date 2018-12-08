@@ -57,7 +57,7 @@ var savePost = function(idx) {
         post_content: app.posts[idx].post_content,
     };
     $.post(editPostUrl, newPost, function(response) {
-        onPageLoad();
+        showPost(idx);
     });
 };
 
@@ -132,6 +132,8 @@ var getImage = function () {
 };
 
 var commentClick = function(idx) {
+    console.log(idx);
+    console.log(app.index);
     if(app.index === idx) {
         app.index = -1;
         return;
@@ -157,7 +159,7 @@ var commentSubmit = function(idx) {
         post_id:p.id,
         comment_content:content
         
-    }, function (response) {
+    }, function () {
         $.post(getcommentUrl, {
             post_id:p.id
         }, function (response) {
@@ -170,6 +172,35 @@ var commentSubmit = function(idx) {
     });
 };
 
+var editcommentClick = function(comment) {
+    if(comment.editing) {
+        $.post(editcommentUrl, comment, function() {
+            $.post(getcommentUrl, {
+                post_id:comment.post_id
+            }, function (response) {
+                for (var i in response.comment_list) {
+                    var item = response.comment_list[i];
+                    item.editing = false;
+                }
+                app.comment_list = response.comment_list;
+            });
+        });
+    }
+    comment.editing = !comment.editing;
+};
+
+var commentDelete = function(comment) {
+    console.log(comment);
+    console.log(app.comment_list);
+    $.post(deletecommentUrl,
+        { id: app.comment_list[comment].post_id },
+        function() {
+            app.comment_list.splice(comment.id,1);
+            if(app.comment_list <= 99)
+                enumerate(app.comment_list);
+            enumerate(app.comment_list);
+        })
+};  
 
 var app = new Vue({
     el: '#app',
@@ -185,8 +216,6 @@ var app = new Vue({
         newComment: "",
         posts: [],
         comment_list: [],
-        has_more: false,
-        adding_comment: false,
         search: '',
         searchSports: 'Sports',
         searchNews: 'News',
@@ -199,7 +228,7 @@ var app = new Vue({
         searchReli: 'Religion',
         searchTech: 'Technology',
         showPostStatus: false,
-        useremail: useremail
+        useremail: useremail,
     },
     methods: {
         submitPost: insertPost,
@@ -211,7 +240,9 @@ var app = new Vue({
         uploadFile: uploadFile,
         getImage: getImage,
         commentClick: commentClick,
-        commentSubmit: commentSubmit
+        commentSubmit: commentSubmit,
+        editcommentClick: editcommentClick,
+        commentDelete: commentDelete
         
     },
     computed: {

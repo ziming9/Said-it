@@ -35,7 +35,8 @@ def get_all_posts():
             user_name=get_user_name(post.author),
             title=post.title,
             post_content=post.post_content,
-            category=post.category
+            category=post.category,
+            post_time=post.post_time
         )
         
         post_list.append(post_to_send)  
@@ -81,21 +82,13 @@ def post_image():
     return "ok"
 
 
-@auth.requires_login()
-def add_post():
-    form = SQLFORM(db.post)
-    if form.process().accepted:
-        redirect(URL('default', 'index'))
-    return dict(form=form)
-
-
 def get_comment():
     post_id=int(request.vars.post_id)
     data = db(db.comments.post_id==post_id).select(db.comments.ALL, orderby=~db.comments.comment_time)
     print data
     return response.json(dict(comment_list=data))
 
-
+@auth.requires_signature()
 def add_comment():
     post_id = int(request.vars.post_id)
     db.comments.insert(
@@ -105,3 +98,17 @@ def add_comment():
         author=auth.user.email
     )
     return "ok"
+
+@auth.requires_signature()
+def edit_comment():
+    comment_id = int(request.vars.id)
+    comment_content = request.vars.comment_content
+    db(db.comments.id==comment_id).update(
+        comment_content=comment_content
+    )
+    return "ok"
+
+@auth.requires_signature()
+def delete_comment():
+    db(db.comments.id == request.vars.id).delete()
+    return 'comment deleted'

@@ -10,6 +10,8 @@
 }
 
 .animation{
+    font-size:14px;
+
     width: 100px;
     height: 100px;
     position: relative;
@@ -50,24 +52,55 @@
 
 .btn-info {
     font-family: Verdana;
+    font-size:14px;
     margin-right: 100px;
 }
-.categoryName-before {
-    color: #fff;
+.btn-warning { 
+    color : darkslategray;
+}
+.authorName-before {
+    color: darkslategray;
     font-weight: bold;
     font-family: Helvetica;
     text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);   
     width : 250px;
+    margin-left : 40px;
+    font-size:14px;
+
+}
+.categoryName-before {
+    color: darkslategray;
+    font-weight: bold;
+    font-family: Helvetica;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);   
+    width : 250px;
+    margin-left: 20px;
+    font-size:14px;
+
+}
+.buttonPost {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    width: 100%;
+    
 }
 .categoryName {
-    color: #fff;
+    color: darkslategray;
     font-weight: bold;
+    font-size:14px;
+
     font-family: Helvetica;
     text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);   
 }
 .postedName {
-    color: #fff;
+    color: darkslategray;
     font-weight: bold;
+    font-size:14px;
+
     font-family: Helvetica;
     text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);   
 }
@@ -75,7 +108,8 @@
     background: url(/init/static/images/yellow.jpg) center no-repeat;
     background-size: cover;
     height : 100%;
-    margin : 0px;
+    margin : -20px -15px 0px -30px;
+    padding-bottom : 30px;
 }
 
 .post-box img {
@@ -94,11 +128,33 @@
     text-align: center;
 }
 
+.commentContent {
+    position: relative;
+    height: auto;
+    margin: 20px 10px;
+    padding: 5px;
+    background-color: lemonchiffon;
+    border-radius: 3px;
+    border: 5px solid moccasin;
+    font-size:14px;
+
+}
+.commentBox {
+    font-size:14px;
+}
+.commentAuthor {
+    color : dodgerblue;
+
+}
+.commentAddReply {
+    padding-bottom: 20px;
+    border-bottom : 3px solid silver;
+}
 .post-box {
     border-radius: 25px;
     margin-left:180px;
     border: 1px solid black;
-    width: 700px;
+    width: 600px;
     padding: 15px;
     align-content: center;
     background-size: 100%;
@@ -109,4 +165,9 @@
 .copyright {
     width : 100%;
     color: white;
+}
+.bottomThing {
+    margin : 0px -15px 0px -30px;
+
+    
 }

@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.AttributeError'> 'DAL' object has no attribute 'comment'"
+p3
+sS'layer'
+p4
+S'/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/applications/init/controllers/api.py'
+p5
+sS'code'
+p6
+S'<code object <module> at 0x7fa8cc005230, file "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/applications/init/controllers/api.py", line 1>'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/gluon/restricted.py", line 219, in restricted\n    exec(ccode, environment)\n  File "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/applications/init/controllers/api.py", line 117, in <module>\n  File "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/gluon/globals.py", line 421, in <lambda>\n    self._caller = lambda f: f()\n  File "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/applications/init/controllers/api.py", line 113, in edit_comment\n    db(db.comment.id==comment_id).update(\n  File "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/gluon/packages/dal/pydal/base.py", line 673, in __getattr__\n    return BasicStorage.__getattribute__(self, key)\nAttributeError: \'DAL\' object has no attribute \'comment\'\n'
+p11
+s.
