@@ -1,7 +1,9 @@
+import random
+
 def get_user_name(email):
     u = db(db.auth_user.email == email).select().first()
     if u is None:
-        return 'Anonymous'
+        return 'Anonymous #{}'.format(random.randint(1,999))
     else:
         return ' '.join([u.first_name, u.last_name])
 
@@ -88,14 +90,13 @@ def get_comment():
     print data
     return response.json(dict(comment_list=data))
 
-@auth.requires_signature()
 def add_comment():
     post_id = int(request.vars.post_id)
     db.comments.insert(
-        user_name=get_user_name(auth.user.email),
+        user_name=get_user_name(request.vars.email),
         comment_content=request.vars.comment_content,
         post_id=post_id,
-        author=auth.user.email
+        author=request.vars.email
     )
     return "ok"
 

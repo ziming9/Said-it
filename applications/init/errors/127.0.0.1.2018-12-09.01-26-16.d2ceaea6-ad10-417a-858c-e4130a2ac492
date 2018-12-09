@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.NameError'> global name 'random' is not defined"
+p3
+sS'layer'
+p4
+S'/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/applications/init/controllers/api.py'
+p5
+sS'code'
+p6
+S'<code object <module> at 0x7f46502a1930, file "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/applications/init/controllers/api.py", line 1>'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/gluon/restricted.py", line 219, in restricted\n    exec(ccode, environment)\n  File "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/applications/init/controllers/api.py", line 115, in <module>\n  File "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/gluon/globals.py", line 421, in <lambda>\n    self._caller = lambda f: f()\n  File "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/applications/init/controllers/api.py", line 94, in add_comment\n    user_name=get_user_name(request.vars.email),\n  File "/mnt/c/Users/Ziming/Desktop/UCSC-Fall-18/CMPS183/said-it/applications/init/controllers/api.py", line 4, in get_user_name\n    return \'Anonymous # {}\'.format(random.randint(1,999))\nNameError: global name \'random\' is not defined\n'
+p11
+s.
