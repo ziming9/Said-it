@@ -43,7 +43,7 @@ var deletePost = function(idx) {
                 processPosts();
             enumerate(app.posts);
         })
-}
+};
 
 var editPost = function(idx) {
     app.posts[idx].editing = true;
@@ -132,8 +132,6 @@ var getImage = function () {
 };
 
 var commentClick = function(idx) {
-    console.log(idx);
-    console.log(app.index);
     if(app.index === idx) {
         app.index = -1;
         return;
@@ -153,6 +151,7 @@ var commentClick = function(idx) {
 
 var commentSubmit = function(idx) {
     var p = app.posts[idx];
+    console.log(p);
     var content = app.newComment;
     app.newComment = "";
     $.post(addcommentUrl, {
@@ -190,17 +189,28 @@ var editcommentClick = function(comment) {
 };
 
 var commentDelete = function(comment) {
-    console.log(comment);
-    console.log(app.comment_list);
+    var cid = comment.id;
     $.post(deletecommentUrl,
-        { id: app.comment_list[comment].post_id },
+        { id: comment.id },
         function() {
-            app.comment_list.splice(comment.id,1);
-            if(app.comment_list <= 99)
-                enumerate(app.comment_list);
-            enumerate(app.comment_list);
+            for (var i in app.comment_list) {
+                if (cid == app.comment_list[i].id) {
+                    app.comment_list.splice(i, 1);
+                }
+            }
+        });
+};
+
+var deletePost = function(idx) {
+    $.post(deleteUrl, 
+        { id: app.posts[idx].id }, 
+        function() {
+            app.posts.splice(idx,1);
+            if(app.posts.length <= 99)
+                processPosts();
+            enumerate(app.posts);
         })
-};  
+};
 
 var app = new Vue({
     el: '#app',
