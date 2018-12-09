@@ -13,8 +13,9 @@
   var image_post_url = "{{=URL('api', 'post_image')}}";
   var image_get_url = "{{=URL('api', 'get_image')}}";
   var getcommentUrl = "{{=URL('api', 'get_comment')}}";
-  var addcommentUrl = "{{=URL('api', 'add_comment')}}";
-  var editcommentUrl = "{{=URL('api', 'edit_comment')}}";
+  var addcommentUrl = "{{=URL('api', 'add_comment', user_signature=True)}}";
+  var editcommentUrl = "{{=URL('api', 'edit_comment', user_signature=True)}}";
+  var deletecommentUrl = "{{=URL('api', 'delete_comment', user_signature=True)}}";
 
   var useremail = "{{='' if auth.user is None else auth.user.email}}";
 </script>
@@ -28,7 +29,11 @@
     </div>
 
     <!-- Search bar-->
-    
+    <div class="search-bar">
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control sm-3" type="text" v-model="search" placeholder="Search by title"/>
+        </form>
+    </div>
 
     <div class = "animationText center">   
       Sign up &emsp;&emsp;&emsp;&emsp;&emsp;
@@ -54,19 +59,30 @@
       <div v-for="post in newsPosts" class="post-box">
         
           <div v-if="!post.showPostStatus">
+            <button class = "buttonPost" v-on:click="showPost(post._idx)" >
             <div class="post-title">
               <h3>${ post.title }</h3>
-              <i v-on:click="showPost(post._idx)" class="fa fa-plus-square"></i>
+              <i class="fa fa-plus-square"></i>
             </div>
-            <div class ="categoryName-before">${ post.category } </div>
+            <div class = "row">
+              <div class ="categoryName-before left">${ post.category } </div>
+              <div class ="authorName-before right"> ${post.user_name} </div>
+            </div>
+          </button>
           </div>
+
           
           <div v-if="post.showPostStatus">
             <div class = "hideButton center">
               <i v-on:click="hidePost(post._idx)" class="fa fa-minus"> Hide Post </i>
             </div>
             <div v-if="!post.editing">
-              
+              <div class = "postBottom">
+                
+                <div class = "postedName ">
+                  <p align ="center"> Posted by ${post.user_name} ${post.post_time}</p>
+                </div>
+              </div>
               <div class="post-content">
                 <div class="post-titleAfter">
                   <h3 align = "left">${post.title}</h3> 
@@ -76,41 +92,60 @@
                 </div>
                 
                 <div v-if="useremail == post.author">
-                  <button class="fa fa-pencil-square-o" v-on:click="editPost(post._idx)"> Edit</button>
-                  <button class="fa fa-trash-o" v-on:click="deletePost(post._idx)"> Delete</button>
+                  
+                    <button class="btn-warning" v-on:click="editPost(post._idx)"> 
+                      <i class = "fa fa-pencil-square-o">Edit
+                      </i> 
+                    </button>
+                    <button class="btn-warning" v-on:click="deletePost(post._idx)"> 
+                      <i class = "fa fa-pencil-square-o">Delete
+                      </i>
+                    </button>
+                  
                 </div>
 
               </div>
 
               
-              Upload an image file: <input id="file_input" type="file" v-on:change="uploadFile($event,post._idx)" accept="image/jpeg">
+              Upload an image file: <input id="file_input" type="file"  v-on:change="uploadFile($event,post._idx)" accept="image/jpeg">
               <img v-bind:src="img_url" />
 
 
               <div class = "allCommentStuff">
-                <button v-on:click="commentClick(post._idx)">
-                  ${index==post._idx?'Hide comment':'Show Comment'}
-                </button>
+                
+                  <button class = "btn-warning" v-on:click="commentClick(post._idx)">
+                    ${index==post._idx?'Hide comment':'Show Comment'}
+                  </button>
+                
                     <div class="comment_list" v-if="index==post._idx">
                         <div>
                             <div class="container form group">
                                 <div class="form threequarters">
-                                    <textarea v-model="newComment" cols="40" rows="4" placeholder="Enter your comment here" class="comment_box"></textarea>
+                                    <textarea v-model="newComment" cols="40" rows="4"  placeholder="Enter your comment here" class="comment_box"></textarea>
                                 </div>
                             </div>
-
-                            <div class = "commentAddReply">
-                              <button v-on:click="commentSubmit(post._idx)">Add comment</button>
-                            </div> <br>
-                          </div>
-                        <div class="commentitem" v-for="comment in comment_list">
+                            
+                            
+                              <div class = "commentAddReply">                                                              
+                                <button class = "btn-warning" v-on:click="commentSubmit(post._idx)">Add comment</button>
+                              </div> <br>
+                           
+                        </div>
+                      <div class="commentitem" v-for="comment in comment_list">
 
                             <div v-if="useremail==comment.author" style="float: right">
-                                <button class="fa fa-pencil-square-o" v-on:click="editcommentClick(comment)">${comment.editing?'Submit':'Edit'}</button>
+                              <button class="btn-warning" v-on:click="editcommentClick(comment)">
+                                <i class = "fa fa-pencil-square-o"> ${comment.editing?'Submit':'Edit'}
+                                </i>
+                                </button>
+                              <button class="btn-warning" v-on:click="commentDelete(comment)"> 
+                                <i class = "fa fa-pencil-square-o">Delete
+                                </i>
+                              </button>
                             </div>
                             <div v-if="!comment.editing">
                               <div class="commentBox">
-            
+                                
                                   <div class="commentAuthor">
                                     <i class="fa fa-user"></i> ${comment.user_name} ${comment.comment_time}
                                   </div>
@@ -120,21 +155,20 @@
                               </div>
                             </div>
 
-                            <div style="clear: both;">
-                                <div v-if="comment.editing" class="container form_row">
-                                    <div class="label quarter">
-                                        Comment Content:
-                                    </div>
-
-                                    <div class="form threequarters">
-                                        <textarea v-model="comment.comment_content" cols="40" rows="4" placeholder="Enter comment here"></textarea>
-                                    </div>
+                            <div v-if="comment.editing" class="container form_row">
+                                <div class="label quarter">
+                                    Comment Content:
                                 </div>
 
-
+                                <div class="form threequarters">
+                                  <textarea v-model="comment.comment_content" cols="40" rows="4" placeholder="Enter comment here"></textarea>
+                                </div>
                             </div>
 
                         </div>
+                    </div>
+                    <div class = "categoryName center" >
+                      ${post.category}
                     </div>
             </div>
               
@@ -146,7 +180,7 @@
                 <br>
                 <input type="text" v-model="post.title" placeholder="Title" /><br><br>
                 <textarea cols="50" rows="7" v-model="post.post_content" placeholder="Content"></textarea><br>
-                <button v-on:click="savePost(post._idx); showPost(post._idx)">Save</button>
+                <button v-on:click="savePost(post._idx)">Save</button>
               </div>
             
             <!--New add image button-->
@@ -173,14 +207,7 @@
               <p><img id="output" width="170" /></p>
             </div>--> 
             
-            <div class = "postBottom">
-              <div class = "categoryName" >
-                ${post.category}
-              </div>
-              <div class = "postedName ">
-                <p align ="center"> Posted by ${post.user_name} ${post.post_time}</p>
-              </div>
-            </div>
+            
           </div>
             <!--
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#postcontentModal">Expand</button>
