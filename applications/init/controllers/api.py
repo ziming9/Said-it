@@ -92,11 +92,16 @@ def get_comment():
 
 def add_comment():
     post_id = int(request.vars.post_id)
+    logged_in = auth.user_id is not None
+    if logged_in:
+        email = auth.user.email
+    else:
+        email = request.vars.email
     db.comments.insert(
-        user_name=get_user_name(request.vars.email),
+        user_name=get_user_name(email),
         comment_content=request.vars.comment_content,
         post_id=post_id,
-        author=request.vars.email
+        author=email
     )
     return "ok"
 
