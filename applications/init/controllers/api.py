@@ -90,6 +90,7 @@ def get_comment():
     print data
     return response.json(dict(comment_list=data))
 
+@auth.requires_signature()
 def add_comment():
     post_id = int(request.vars.post_id)
     logged_in = auth.user_id is not None

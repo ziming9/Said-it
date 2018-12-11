@@ -201,16 +201,7 @@ var commentDelete = function(comment) {
         });
 };
 
-var deletePost = function(idx) {
-    $.post(deleteUrl, 
-        { id: app.posts[idx].id }, 
-        function() {
-            app.posts.splice(idx,1);
-            if(app.posts.length <= 99)
-                processPosts();
-            enumerate(app.posts);
-        })
-};
+
 
 var app = new Vue({
     el: '#app',

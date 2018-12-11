@@ -29,24 +29,22 @@
     </div>
 
     <!-- Search bar-->
-    <div class="search-bar">
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control sm-3" type="text" v-model="search" placeholder="Search by title"/>
-        </form>
-    </div>
+    
 
-    <div class = "animationText center">   
+    <div class = "animationText">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        &emsp;   
       Sign up &emsp;&emsp;&emsp;&emsp;&emsp;
-      Add Post &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-      Look at posts &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-      Have fun
+      Add Post 
+      
     </div>
     <div class = "animation center"></div>
-
-
+    
     <!-- Display/Edit Post form Here -->
 
     <div class="posts" >
+       
       <div class = "addBox">
         Welcome to <br>
         where you can create your own post<br>
@@ -59,16 +57,19 @@
       <div v-for="post in sportPosts" class="post-box">
         
           <div v-if="!post.showPostStatus">
-            <button class = "buttonPost" v-on:click="showPost(post._idx)" >
-            <div class="post-title">
-              <h3>${ post.title }</h3>
-              <i class="fa fa-plus-square"></i>
-            </div>
-            <div class = "row">
-              <div class ="categoryName-before left">${ post.category } </div>
-              <div class ="authorName-before right"> ${post.user_name} </div>
-            </div>
-          </button>
+              <div class="tooltipa">
+              <button class = "buttonPost" v-on:click="showPost(post._idx)" >
+                <span class="tooltiptexta">Click to expand</span>            
+                <div class="post-title">
+                  <h3>${ post.title }</h3>
+                  <i class="fa fa-plus-square"></i>
+                </div>
+                <div class = "row">
+                  <div class ="categoryName-before left">${ post.category } </div>
+                  <div class ="authorName-before right"> ${post.user_name} </div>
+                </div>
+              </div> 
+            </button>
           </div>
 
           
@@ -76,6 +77,7 @@
             <div class = "hideButton center">
               <i v-on:click="hidePost(post._idx)" class="fa fa-minus"> Hide Post </i>
             </div>
+           
             <div v-if="!post.editing">
               <div class = "postBottom">
                 
@@ -110,7 +112,7 @@
               Upload an image file: <input id="file_input" type="file"  v-on:change="uploadFile($event,post._idx)" accept="image/jpeg">
               <img v-bind:src="img_url" />
 
-
+          
               <div class = "allCommentStuff">
                 
                   <button class = "btn-warning" v-on:click="commentClick(post._idx)">
@@ -132,7 +134,7 @@
                            
                         </div>
                       <div class="commentitem" v-for="comment in comment_list">
-
+                        
                             <div v-if="useremail==comment.author" style="float: right">
                               <button class="btn-warning" v-on:click="editcommentClick(comment)">
                                 <i class = "fa fa-pencil-square-o"> ${comment.editing?'Submit':'Edit'}
@@ -173,8 +175,8 @@
             </div>
               
 
-
-            </div>
+            
+          </div>
 
             <div v-if="post.editing">
                 <br>

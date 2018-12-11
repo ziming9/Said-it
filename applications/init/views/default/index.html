@@ -13,7 +13,7 @@
   var image_post_url = "{{=URL('api', 'post_image')}}";
   var image_get_url = "{{=URL('api', 'get_image')}}";
   var getcommentUrl = "{{=URL('api', 'get_comment')}}";
-  var addcommentUrl = "{{=URL('api', 'add_comment')}}";
+  var addcommentUrl = "{{=URL('api', 'add_comment', user_signature=True)}}";
   var editcommentUrl = "{{=URL('api', 'edit_comment', user_signature=True)}}";
   var deletecommentUrl = "{{=URL('api', 'delete_comment', user_signature=True)}}";
 
@@ -35,11 +35,13 @@
         </form>
     </div>
 
-    <div class = "animationText center">   
+    <div class = "animationText">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        &emsp;   
       Sign up &emsp;&emsp;&emsp;&emsp;&emsp;
-      Add Post &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-      Look at posts &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-      Have fun
+      Add Post 
+      
     </div>
     <div class = "animation center"></div>
     

@@ -8,7 +8,7 @@
 .search-bar {
     margin : auto;
     width: 200px;
-
+    margin-left : 380px;
 }
 
 .animation{
@@ -18,16 +18,15 @@
     height: 100px;
     position: relative;
     animation-name: example;
-    animation-duration: 8s;
+    animation-duration: 4s;
     animation-iteration-count: infinite;
 }
 
 @keyframes example {
-    0%   {background:url(/init/static/images/signup.jpg); left:370px; top:0px; background-size:100%}
-    25%  {background:url(/init/static/images/addpost.png); left:480px; top:0px;background-size:100%}
-    50%  {background:url(/init/static/images/look.png); left:650px; top:000px;background-size:120%}
-    75%  {background:url(/init/static/images/havefun.jpg); left:850px; top:000px;background-size:100px 100px}
-    100%   {background:url(/init/static/images/signup.jpg); left:300px; top:0px; background-size:100%}
+    0%   {background:url(/init/static/images/signup.jpg); left:330px; top:0px; background-size:100%}
+    50%  {background:url(/init/static/images/addpost.png); left:480px; top:0px;background-size:100%}
+    100% {background:url(/init/static/images/signup.jpg); left:330px; top:0px; background-size:100%}
+
 }
 
 .topButton {
