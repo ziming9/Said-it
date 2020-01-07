@@ -7,7 +7,7 @@ def get_user_email():
     return None if auth.user is None else auth.user.email
 
 def get_current_time():
-    return datetime.datetime.now() + datetime.timedelta(seconds = 60 * 3.4)
+    return datetime.datetime.now()
 
 db.define_table('posts',
                 Field('user_name', 'string'),
